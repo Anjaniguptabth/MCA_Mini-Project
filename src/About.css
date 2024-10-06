@@ -1,0 +1,53 @@
+/* General page structure */
+.about-page {
+    padding: 20px;
+    margin-top: 80px; /* Ensure space below the navbar */
+  }
+  
+  .about-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .about-title {
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  /* Cards styling */
+  .about-section {
+    display: flex;
+    flex-direction: column; /* Ensures the cards are displayed in a column, one below the other */
+    gap: 20px; /* Space between the cards */
+    align-items: center; /* Center the cards horizontally */
+  }
+  
+  .about-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    width: 700px;;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth animation */
+  }
+  
+  .about-card h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .about-card p {
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  /* Hover effect */
+  .about-card:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+    background-color: #e9e9e9; /* Slight background color change */
+  }
+  
