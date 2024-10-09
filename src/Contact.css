@@ -9,6 +9,24 @@
     min-height: 100vh; /* Make sure the page takes up the full viewport height */
     
 }
+.popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .popup p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
 
 .contact-header {
     text-align: center;

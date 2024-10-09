@@ -28,17 +28,17 @@ const About = () => {
           <p>
             <strong>{t('anjani')}</strong>
             <br />
-            MERN Stack, ReactJS, NodeJS, MongoDB, JWT Authentication, UI/UX Design.
+           ReactJS, NodeJS, MongoDB,I/UX Design.
           </p>
           <p>
             <strong>{t('liladhar')}</strong>
             <br />
-            MERN Stack, ReactJS, NodeJS, MongoDB, JWT Authentication, UI/UX Design.
+           NodeJS, MongoDB, JWT Authentication
           </p>
           <p>
             <strong>{t('manav')}</strong>
             <br />
-            MERN Stack, ReactJS, NodeJS, MongoDB, JWT Authentication, UI/UX Design.
+            Documentation , Suggesstion , Testing
           </p>
         </div>
 
