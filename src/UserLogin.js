@@ -1,46 +1,66 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next'; // Import useTranslation
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import './Styles.css';
 
 const UserLogin = () => {
-  const { t } = useTranslation(); // Initialize translation
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const { t } = useTranslation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle user login logic here
-    console.log('User logging in:', { email, password });
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setErrorMessage('');
 
-  return (
-    <div className="form-container">
-      <h2>{t('user')} {t('login')}</h2> {/* Use translation keys */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder={t('emailPlaceholder')} // Use translation key for placeholder
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder={t('passwordPlaceholder')} // Use translation key for placeholder
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">{t('login')}</button> {/* Use translation key for button text */}
-      </form>
-      <p>
-        <a href="/forgot-password">{t('forgotPassword')}</a> {/* Use translation key */}
-      </p>
-      <p>
-        {t('dontHaveAccount')} <a href="/UserSignup">{t('signup')}</a> {/* Use translation keys */}
-      </p>
-    </div>
-  );
+        try {
+            const response = await axios.post('http://localhost:5000/api/user/login', {
+                email,
+                password,
+            });
+
+            if (response.data.token) {
+                // Store token and redirect to user dashboard
+                localStorage.setItem('userToken', response.data.token);
+                alert(t('loginSuccessfully')); // Show success message
+                navigate('/UserDashboard'); // Adjust this route based on your application
+            } else {
+                setErrorMessage(t('loginFailed'));
+            }
+        } catch (error) {
+            setErrorMessage(t('loginFailed'));
+            console.error('Login error:', error);
+        }
+    };
+
+    return (
+        <div className="form-container">
+            <h2>{t('user')} {t('login')}</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="email"
+                    placeholder={t('emailPlaceholder')}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder={t('passwordPlaceholder')}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit">{t('login')}</button>
+            </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <p>
+                {t('dontHaveAccount')} <a href="/UserSignup">{t('signup')}</a>
+            </p>
+        </div>
+    );
 };
 
 export default UserLogin;

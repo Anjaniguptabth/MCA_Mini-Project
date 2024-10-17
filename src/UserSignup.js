@@ -1,90 +1,91 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import { useTranslation } from 'react-i18next'; // Import useTranslation for i18n
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import './Styles.css';
 
 const UserSignup = () => {
-  const { t } = useTranslation(); // Initialize translation
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); // New state for confirm password
-  const [contactNumber, setContactNumber] = useState(''); // New state for contact number
-  const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+    const { t } = useTranslation();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [contactNumber, setContactNumber] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage(''); // Reset error message
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setErrorMessage('');
 
-    // Validate password and confirm password
-    if (password !== confirmPassword) {
-      setErrorMessage(t('passwordMismatch')); // Use translation for error message
-      return;
-    }
+        try {
+            const response = await axios.post('http://localhost:5000/api/user/signup', {
+                name,
+                email,
+                contact: contactNumber,
+                password,
+            });
 
-    // Mock signup logic
-    try {
-      // Here, replace this mock with actual API call
-      console.log('User signing up:', { name, email, password, contactNumber });
-      // Simulate API response delay
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating network delay
+            if (response.status === 201) {
+                // Successful signup
+                alert(t('userRegisteredSuccessfully')); // Show success message
+                setName('');
+                setEmail('');
+                setPassword('');
+                setContactNumber('');
+                navigate('/UserLogin'); // Redirect to User Login or another page after successful signup
+            } else {
+                setErrorMessage(t('signupFailed'));
+            }
+        } catch (error) {
+            console.error('Signup error:', error); // Log the error
+            if (error.response && error.response.data.message) {
+                setErrorMessage(error.response.data.message); // Display specific server error message
+            } else {
+                setErrorMessage(t('signupFailed'));
+            }
+        }
+    };
 
-      // Navigate to the login page on successful signup
-      navigate('/UserLogin');
-    } catch (error) {
-      // Handle signup error
-      setErrorMessage(t('signupFailed')); // Use translation for error message
-    }
-  };
-
-  return (
-    <div className="form-container">
-      <h2>{t('signup')}</h2> {/* Use translation for heading */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder={t('namePlaceholder')} // Use translation for placeholder
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder={t('emailPlaceholder')} // Use translation for placeholder
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="tel"
-          placeholder={t('contactPlaceholder')} // Use translation for placeholder
-          value={contactNumber}
-          onChange={(e) => setContactNumber(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder={t('passwordPlaceholder')} // Use translation for placeholder
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder={t('confirmPasswordPlaceholder')} // Use translation for placeholder
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <button type="submit">{t('signup')}</button> {/* Use translation for button text */}
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Error message */}
-      <p>
-        {t('dontHaveAccount')} <a href="/UserLogin">{t('login')}</a> {/* Use translation for the message */}
-      </p>
-    </div>
-  );
+    return (
+        <div className="form-container">
+            <h2>{t('user')} {t('signup')}</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder={t('namePlaceholder')}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                />
+                <input
+                    type="email"
+                    placeholder={t('emailPlaceholder')}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="tel"
+                    placeholder={t('contactPlaceholder')}
+                    value={contactNumber}
+                    onChange={(e) => setContactNumber(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder={t('passwordPlaceholder')}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit">{t('signup')}</button>
+            </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <p>
+                {t('alreadyHaveAccount')} <a href="/UserLogin">{t('login')}</a>
+            </p>
+        </div>
+    );
 };
 
 export default UserSignup;

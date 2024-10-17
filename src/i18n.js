@@ -51,6 +51,14 @@ i18n
           passwordsDoNotMatch: "पासवर्ड जुळत नाहीत.",
           signupFailed: "नोंदणी अयशस्वी झाली. कृपया पुन्हा प्रयत्न करा.",
           contactPlaceholder: "तुमचा संपर्क क्रमांक",
+          adminForgotPasswordTitle: "प्रशासक पासवर्ड विसरला",
+          userForgotPasswordTitle: "वापरकर्ता पासवर्ड विसरला",
+          enterRegisteredEmail: "आपला नोंदणीकृत ईमेल प्रविष्ट करा",
+          sendResetLink: "रीसेट लिंक पाठवा",
+          forgotPasswordInstruction: "जर त्या ईमेलसह खाते अस्तित्वात असेल, तर तुम्हाला पासवर्ड रीसेट करण्याचे निर्देश असलेले ईमेल प्राप्त होईल.",
+          rememberedPassword: "पासवर्ड लक्षात आला?",
+          loginHere: "लॉगिन करा",
+
         },
       },
       en: {
@@ -95,6 +103,13 @@ i18n
           passwordsDoNotMatch: "Passwords do not match.",
           signupFailed: "Signup failed. Please try again.",
           contactPlaceholder: "Your Contact Number",  // English
+          adminForgotPasswordTitle: "Admin Forgot Password",
+          userForgotPasswordTitle: "User Forgot Password",
+          enterRegisteredEmail: "Enter your registered email",
+          sendResetLink: "Send Reset Link",
+          forgotPasswordInstruction: "If an account with that email exists, you will receive an email with password reset instructions.",
+          rememberedPassword: "Remembered your password?",
+          loginHere: "Login",
         },
       },
       hi: {
@@ -139,6 +154,13 @@ i18n
           passwordsDoNotMatch: "पासवर्ड मेल नहीं खाते हैं।",
           signupFailed: "साइनअप असफल। कृपया पुनः प्रयास करें।",
           contactPlaceholder: "आपका संपर्क नंबर",  // Hindi for 'Your Contact Number'
+          adminForgotPasswordTitle: "प्रशासक पासवर्ड भूल गए",
+          userForgotPasswordTitle: "उपयोगकर्ता पासवर्ड भूल गए",
+          enterRegisteredEmail: "अपना पंजीकृत ईमेल दर्ज करें",
+          sendResetLink: "रीसेट लिंक भेजें",
+          forgotPasswordInstruction: "यदि उस ईमेल के साथ कोई खाता मौजूद है, तो आपको पासवर्ड रीसेट निर्देशों वाला ईमेल प्राप्त होगा।",
+          rememberedPassword: "पासवर्ड याद आ गया?",
+          loginHere: "लॉगिन करें",
         },
       },
     },

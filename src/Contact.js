@@ -1,3 +1,5 @@
+// Contact.js
+
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Contact.css";
@@ -5,7 +7,7 @@ import "./Contact.css";
 const Contact = () => {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false); // State for handling error
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,16 +16,14 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Form Data:", formData); // Log form data for debugging
 
     try {
       const response = await fetch('http://localhost:5000/send-email', {
@@ -34,36 +34,27 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      console.log("Response Status:", response.status); // Log response status
-      const data = await response.json(); // Fetch response data
 
       if (response.ok) {
         setSubmitted(true);
         setError(false);
-        console.log("Success:", data); // Log success response
+
+        // Clear the form data after success
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+
+        // Automatically close success popup after 3 seconds
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 3000);
       } else {
-        console.error("Error from backend:", data.error); // Log backend error
         setError(true);
-        setSubmitted(false);
       }
-    } catch (error) {
-      console.error('Error during fetch:', error); // Log any fetch errors
+    } catch (err) {
       setError(true);
-      setSubmitted(false);
-    }
-
-    // Clear form fields after submission
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
-
-    // Automatically close the popup after 3 seconds (if success)
-    if (submitted) {
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 3000);
     }
   };
 
@@ -125,7 +116,9 @@ const Contact = () => {
           ></textarea>
         </div>
 
-        <button type="submit" className="submit-btn">{t('sendMessageButton')}</button>
+        <button type="submit" className="submit-btn">
+          {t('sendMessageButton')}
+        </button>
       </form>
     </div>
   );

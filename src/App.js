@@ -10,6 +10,7 @@ import AdminLogin from './AdminLogin';
 import AdminSignup from './AdminSignup';
 import UserLogin from './UserLogin';
 import UserSignup from './UserSignup';
+import AdminDashboard from './AdminDashboard';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -21,15 +22,13 @@ function App() {
       year: '1907',
       imageUrl: 'https://books.google.co.in/books/content?id=llpAAQAAIAAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U2Gic3XK5CP4mzUQuxZBIZiU4JvPw&w=1280',
       pdf:'https://www.google.co.in/books/edition/The_Tale_of_Peter_Rabbit/llpAAQAAIAAJ?hl=en&gbpv=1'
-     
     },
     {
       name: 'The Constitution of India – in Diglot Edition',
       author: 'Dr. BabaSaheb Bhimrao Ambekar',
-      year:'1950',
+      year: '1950',
       imageUrl: 'https://rukminim2.flixcart.com/image/850/1000/xif0q/regionalbooks/i/c/e/bharat-ka-sanvidhan-the-constitution-of-india-original-imagpv9ufssre7sj.jpeg?q=90&crop=false',
       pdf:'https://lddashboard.legislative.gov.in/sites/default/files/Savidhan.pdf'
-
     },
     {
       name: 'Ratan Tata A Complete Biography',
@@ -126,15 +125,15 @@ function App() {
         {/* Routes - Rendering based on the current path */}
     
         <Routes>
-  <Route path="/" element={<Home books={books} t={t} />} />
-  <Route path="/about" element={<About />} />
-  <Route path="/contact" element={<Contact />} />
-  <Route path="/AdminLogin" element={<AdminLogin />} /> {/* Updated */}
-  <Route path="/AdminSignup" element={<AdminSignup />} /> {/* Updated */}
-  <Route path="/UserLogin" element={<UserLogin />} /> {/* Updated */}
-  <Route path="/UserSignup" element={<UserSignup />} /> {/* Updated */}
-</Routes>
-
+          <Route path="/" element={<Home books={books} t={t} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/AdminLogin" element={<AdminLogin />} />
+          <Route path="/AdminSignup" element={<AdminSignup />} />
+          <Route path="/UserLogin" element={<UserLogin />} />
+          <Route path="/UserSignup" element={<UserSignup />} />
+          <Route path='/AdminDashboard' element={<AdminDashboard />} />
+        </Routes>
 
         {/* Footer */}
         <footer className="footer">
